@@ -3,11 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Masthead from '../layouts/Masthead.astro';
+import Bio from '../layouts/Bio.astro';
 ---
 
 <Layout title="Welcome to Astro.">
 	<Header />
 	<main>
+		<Masthead />
 		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
 		<p class="instructions">
 			To get started, open the directory <code>src/pages</code> in your project.<br />
@@ -35,6 +38,7 @@ import Footer from '../components/Footer.astro';
 				body="Come say hi to our amazing Discord community. ❤️"
 			/>
 		</ul>
+		<Bio />
 	</main>
 	<Footer />
 </Layout>
@@ -43,7 +47,7 @@ import Footer from '../components/Footer.astro';
 	main {
 		margin: auto;
 		padding: 1.5rem;
-		max-width: 60ch;
+		max-width: 800px;
 	}
 	h1 {
 		font-size: 3rem;
