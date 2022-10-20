@@ -1,3 +1,5 @@
+![Alt](https://repobeats.axiom.co/api/embed/0ef09666cb2fbdbf9b56293c460063ef10495282.svg "Repobeats analytics image")
+
 # Welcome to [Astro](https://astro.build)
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
