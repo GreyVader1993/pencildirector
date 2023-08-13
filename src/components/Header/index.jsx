@@ -14,8 +14,6 @@ import {
   Squares2X2Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import Logo from './../assets/images/logo.png'
 
 const solutions = [
   {
@@ -79,7 +77,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Header() {
+const Header = () => {
   return (
     <Popover className="relative bg-amber-50">
       <div className="mx-auto max-w-7xl px-6">
@@ -174,3 +172,5 @@ export default function Header() {
     </Popover>
   )
 }
+
+export default Header;
