@@ -5,8 +5,7 @@ const Home = () => {
     return (
         <>
             <HomepageMasthead />
-            {/* <HomepageScroll /> */}
-        </>
+                {/* <HomepageScroll /> */}</>
     );
 }
 
