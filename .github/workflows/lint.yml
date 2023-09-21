@@ -21,13 +21,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
       # ESLint and Prettier must be in `package.json`
-      - name: Install Node.js dependencies
-        run: npm ci
+      - name: Install Yarn dependencies
+        run: yarn install
 
       - name: Lint Action
         uses: wearerequired/lint-action@v2.3.0
