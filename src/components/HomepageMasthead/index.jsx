@@ -3,7 +3,7 @@ import React from "react";
 const HomepageMasthead = () => {
   return (
     <div className="h-screen flex flex-col justify-center items-center bg-amber-50">
-      <h1 className="font-fraunces font-semibold text-3xl md:text-7xl text-center text-indigo-500 mb-8">
+      <h1 className="font-fraunces font-semibold text-4xl md:text-7xl text-center text-indigo-500 mb-12">
         Shraddha Tiwari
       </h1>
       <div className="flex flex-row gap-2">
@@ -26,9 +26,6 @@ const HomepageMasthead = () => {
           />
         </video>
       </div>
-      <a href="/home" className="font-fraunces font-semibold text-4xl text-center text-indigo-500 bottom-1 z-10 border-2 border-indigo-500 rounded-xl mt-8 py-0.5 px-4 hover:text-white hover:bg-indigo-500 cursor-pointer">
-        Enter
-      </a>
     </div>
   );
 };
