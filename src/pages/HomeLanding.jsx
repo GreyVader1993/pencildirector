@@ -1,4 +1,4 @@
-import HomepageTimeline from '../components/HomepageTimeline/index.jsx';
+import HomepageTimeline from "../components/HomepageTimeline/index.jsx";
 
 const Home = () => {
   return (

@@ -38,7 +38,7 @@ const HomepageTimeline = () => {
           </div>
           <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
             <source
-              src="https://video.wixstatic.com/video/695feb_cb7b0a9043fc4bd3a5bccdc861e12c4b/1080p/mp4/file.mp4"
+              src="https://video.wixstatic.com/video/695feb_e25b7f2d83da4220826780ce6fed994c/720p/mp4/file.mp4"
               type="video/mp4"
             />
           </video>
@@ -61,7 +61,7 @@ const HomepageTimeline = () => {
           </div>
           <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
             <source
-              src="https://video.wixstatic.com/video/695feb_cb7b0a9043fc4bd3a5bccdc861e12c4b/1080p/mp4/file.mp4"
+              src="https://video.wixstatic.com/video/695feb_0c876e6794494665b6c4485be610eb4e/1080p/mp4/file.mp4"
               type="video/mp4"
             />
           </video>
@@ -89,7 +89,7 @@ const HomepageTimeline = () => {
           </div>
           <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
             <source
-              src="https://video.wixstatic.com/video/695feb_cb7b0a9043fc4bd3a5bccdc861e12c4b/1080p/mp4/file.mp4"
+              src="https://video.wixstatic.com/video/695feb_a8bbaf9e65964412be2dbc2bedeb488d/1080p/mp4/file.mp4"
               type="video/mp4"
             />
           </video>
@@ -111,7 +111,13 @@ const HomepageTimeline = () => {
           </div>
           <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
             <source
-              src="https://video.wixstatic.com/video/695feb_cb7b0a9043fc4bd3a5bccdc861e12c4b/1080p/mp4/file.mp4"
+              src="https://video.wixstatic.com/video/695feb_89581d15c7fe4467a83b5c086b91cf0e/1080p/mp4/file.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
+            <source
+              src="https://video.wixstatic.com/video/695feb_015ed894c2134813b6fb6fac105c0696/1080p/mp4/file.mp4"
               type="video/mp4"
             />
           </video>
@@ -133,7 +139,7 @@ const HomepageTimeline = () => {
           </div>
           <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
             <source
-              src="https://video.wixstatic.com/video/695feb_cb7b0a9043fc4bd3a5bccdc861e12c4b/1080p/mp4/file.mp4"
+              src="https://video.wixstatic.com/video/695feb_1fb42600364d499496bdc14c29d4d156/1080p/mp4/file.mp4"
               type="video/mp4"
             />
           </video>
@@ -152,7 +158,7 @@ const HomepageTimeline = () => {
           </div>
           <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
             <source
-              src="https://video.wixstatic.com/video/695feb_cb7b0a9043fc4bd3a5bccdc861e12c4b/1080p/mp4/file.mp4"
+              src="https://video.wixstatic.com/video/695feb_729fe45622604ee19ed97465221431da/1080p/mp4/file.mp4"
               type="video/mp4"
             />
           </video>
@@ -172,7 +178,7 @@ const HomepageTimeline = () => {
           </div>
           <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
             <source
-              src="https://video.wixstatic.com/video/695feb_cb7b0a9043fc4bd3a5bccdc861e12c4b/1080p/mp4/file.mp4"
+              src="https://video.wixstatic.com/video/695feb_804924807cdc40d89dfd224805223f8c/1080p/mp4/file.mp4"
               type="video/mp4"
             />
           </video>
@@ -191,7 +197,7 @@ const HomepageTimeline = () => {
           </div>
           <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
             <source
-              src="https://video.wixstatic.com/video/695feb_cb7b0a9043fc4bd3a5bccdc861e12c4b/1080p/mp4/file.mp4"
+              src="https://video.wixstatic.com/video/695feb_e714adc713fd48e1aef9420c9060275c/1080p/mp4/file.mp4"
               type="video/mp4"
             />
           </video>
@@ -212,12 +218,13 @@ const HomepageTimeline = () => {
             substantially. At the stroke of the midnight hour, when the world
             sleeps, India will awake to life and freedom.
           </div>
-          <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
-            <source
-              src="https://video.wixstatic.com/video/695feb_cb7b0a9043fc4bd3a5bccdc861e12c4b/1080p/mp4/file.mp4"
-              type="video/mp4"
-            />
-          </video>
+        <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
+          <source
+            src="https://video.wixstatic.com/video/695feb_ce07570ecb594a36abdac2f23be9f996/1080p/mp4/file.mp4"
+            type="video/mp4"
+          />
+        </video>
+
         </div>
       </div>
     </div>
