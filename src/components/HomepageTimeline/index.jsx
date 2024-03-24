@@ -8,7 +8,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Joute</div>
-            <time class="font-caveat font-medium text-indigo-500">2021</time>
           </div>
           <div class="text-slate-500 text-left">
             A stop motion puppet animation created in collaboration with
@@ -30,7 +29,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Transistions</div>
-            <time class="font-caveat font-medium text-indigo-500">2022</time>
           </div>
           <div class="text-slate-500 text-left">
             A short Experimental mixed media work based on the History of Film
@@ -50,7 +48,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Tatva</div>
-            <time class="font-caveat font-medium text-indigo-500">2020</time>
           </div>
           <div class="text-slate-500 text-left">
             TATVA which means the Elements of nature is an short experimental
@@ -73,7 +70,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Neer - The Dream</div>
-            <time class="font-caveat font-medium text-indigo-500">2020</time>
           </div>
           <div class="text-slate-500 text-left">
             I don’t dream much or you can say I can’t remember my dreams very
@@ -101,7 +97,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Stop the Motion</div>
-            <time class="font-caveat font-medium text-indigo-500">2020</time>
           </div>
           <div class="text-slate-500 text-left">
             A stop motion puppet animation created in collaboration with
@@ -129,7 +124,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Who am I</div>
-            <time class="font-caveat font-medium text-indigo-500">2020</time>
           </div>
           <div class="text-slate-500 text-left">
             Artist Identity is one of the most important parts of their works .
@@ -151,7 +145,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Coffee Beans</div>
-            <time class="font-caveat font-medium text-indigo-500">2020</time>
           </div>
           <div class="text-slate-500 text-left">
             Coffee Beans is a Pixilation Stop Motion short film.
@@ -170,7 +163,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Altered Realities</div>
-            <time class="font-caveat font-medium text-indigo-500">2020</time>
           </div>
           <div class="text-slate-500 text-left">
             Altered Realities is a short film which narrates the story of the
@@ -190,7 +182,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Happy Puppet</div>
-            <time class="font-caveat font-medium text-indigo-500">2020</time>
           </div>
           <div class="text-slate-500 text-left">
             It's a Happy video of a happy puppet made by a happy puppeteer.
@@ -209,7 +200,6 @@ const HomepageTimeline = () => {
         <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow">
           <div class="flex items-center justify-between space-x-2 mb-1 text-lg">
             <div class="font-bold text-slate-900">Colors of Freedom</div>
-            <time class="font-caveat font-medium text-indigo-500">2020</time>
           </div>
           <div class="text-slate-500 text-left">
             Based on Jawaharlal Nehru's Tryst with Destiny speech. "Long years
@@ -218,13 +208,12 @@ const HomepageTimeline = () => {
             substantially. At the stroke of the midnight hour, when the world
             sleeps, India will awake to life and freedom.
           </div>
-        <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
-          <source
-            src="https://video.wixstatic.com/video/695feb_ce07570ecb594a36abdac2f23be9f996/1080p/mp4/file.mp4"
-            type="video/mp4"
-          />
-        </video>
-
+          <video className="mx-auto my-4 opacity-95 rounded-xl" muted controls>
+            <source
+              src="https://video.wixstatic.com/video/695feb_ce07570ecb594a36abdac2f23be9f996/1080p/mp4/file.mp4"
+              type="video/mp4"
+            />
+          </video>
         </div>
       </div>
     </div>
