@@ -14,14 +14,14 @@ The enquiry form needs the Vercel function, so it only works on the deployed sit
 
 ## Where things are
 
-| To change…                         | Edit                          |
-| ---------------------------------- | ----------------------------- |
-| Name, tagline, email, links, nav   | `src/data/site.js`            |
-| Films on the Work page             | `src/data/projects.js`        |
-| Bio, paintings, exhibitions        | `src/data/about.js`           |
-| Colors, fonts, spacing             | top of `src/index.css` (`:root`) |
-| Enquiry options                    | `enquiryTypes` in `src/data/site.js` (keep in sync with `api/enquire.js`) |
-| Painting images                    | `public/images/artworks/`     |
+| To change…                       | Edit                                                                      |
+| -------------------------------- | ------------------------------------------------------------------------- |
+| Name, tagline, email, links, nav | `src/data/site.js`                                                        |
+| Films on the Work page           | `src/data/projects.js`                                                    |
+| Bio, paintings, exhibitions      | `src/data/about.js`                                                       |
+| Colors, fonts, spacing           | top of `src/index.css` (`:root`)                                          |
+| Enquiry options                  | `enquiryTypes` in `src/data/site.js` (keep in sync with `api/enquire.js`) |
+| Painting images                  | `public/images/artworks/`                                                 |
 
 ## Add a film
 
