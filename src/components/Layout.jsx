@@ -10,7 +10,7 @@ function Header() {
   }, [pathname]);
 
   return (
-    <header className={pathname === "/" ? "header header--overlay" : "header"}>
+    <header className="header">
       <Link to="/" className="wordmark">{site.name}</Link>
       <button className="menu-toggle" aria-expanded={open} aria-controls="site-nav" onClick={() => setOpen(!open)}>
         {open ? "Close" : "Menu"}

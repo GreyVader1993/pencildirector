@@ -1,75 +1,67 @@
-# Shraddha Tiwari — portfolio
+# Shraddha Tiwari — artist site
 
-React + Vite, plain CSS, no backend. Content lives in `src/data/`; layout lives in `src/components` and `src/pages`.
+React + Vite, plain CSS. Three pages: Home (intro and about), Work (films and paintings), Enquire (contact form). The enquiry form is sent by a Vercel serverless function (`api/enquire.js`) through Resend.
 
 ## Run
 
 ```
 yarn            # install
 yarn dev        # http://localhost:5173
-yarn build      # outputs dist/ (and dist/sitemap.xml once site.url is set)
+yarn build      # validates data, builds to dist/, writes sitemap if site.url is set
 ```
+
+The enquiry form needs the Vercel function, so it only works on the deployed site, or locally with `vercel dev`.
 
 ## Where things are
 
-| To change…                                  | Edit                                    |
-| ------------------------------------------- | --------------------------------------- |
-| Name, tagline, email, social links, CV, nav | `src/data/site.js`                      |
-| Projects (add / edit / reorder)             | `src/data/projects.js`                  |
-| Education page (role, workshops, past work) | `src/data/education.js`                 |
-| About page (bio, methods, exhibitions)      | `src/data/about.js`                     |
-| Colors, fonts, spacing                      | top of `src/index.css` (`:root`)        |
-| Images                                      | `public/images/{work,education,about}/` |
+| To change…                         | Edit                          |
+| ---------------------------------- | ----------------------------- |
+| Name, tagline, email, links, nav   | `src/data/site.js`            |
+| Films on the Work page             | `src/data/projects.js`        |
+| Bio, paintings, exhibitions        | `src/data/about.js`           |
+| Colors, fonts, spacing             | top of `src/index.css` (`:root`) |
+| Enquiry options                    | `enquiryTypes` in `src/data/site.js` (keep in sync with `api/enquire.js`) |
+| Painting images                    | `public/images/artworks/`     |
 
-Anything marked `TODO` in those files, or shown on the site as "To be added", is information still needed from the artist.
-
-## Add a project
+## Add a film
 
 Copy an entry in `src/data/projects.js`:
 
 ```js
 {
-  slug: "my-film",              // becomes /work/my-film
+  slug: "my-film",
   title: "My Film",
   year: "2025",
-  medium: "Hand-drawn animation",
-  featured: true,               // true = appears on the home page
-  cover: "/images/work/my-film.webp",
-  coverAlt: "Describe the still",
+  medium: "Stop-motion animation",
   description: "…",
-  videos: [{ provider: "vimeo", id: "123456789", title: "My Film" }],
+  videos: [{ provider: "file", src: "https://…/my-film.mp4", title: "My Film" }],
 }
 ```
 
-Order in the file is the order on the site. Images: use WebP, around 1600px on the long edge, named `project-slug.webp` (extra stills: `project-slug-2.webp`). Images are never cropped.
+Only direct video files (`provider: "file"`) are supported. Film order on the page follows the file order. `validate-data.mjs` checks each entry at build time. Films play muted on hover and open with sound on click.
 
-## Embed a video
+## Add a painting
 
-`provider` is one of:
+Put the image in `public/images/artworks/`, then add an entry to `artworks` in `src/data/about.js` with `title`, `medium`, `image`, and the image's pixel size `w` and `h`.
 
-- `youtube` + `id` (the part after `v=`). Uses `youtube-nocookie.com`.
-- `vimeo` + `id` (the number in the URL). Adds `dnt=1`. For unlisted videos the id may need the hash: use `id: "123456789?h=abcdef"`-style only if Vimeo's embed code shows one.
-- `file` + `src` (direct `.mp4` URL).
+## Enquiry form
 
-Optional: `poster` (image shown before play), `aspect` (e.g. `"4 / 5"`), `caption`. Players load only when the visitor presses Play: no autoplay, no third-party requests until then. To change host, change `provider` and `id`/`src`; nothing else.
+Set these environment variables in Vercel (Project Settings → Environment Variables):
 
-**Current videos are hosted on Wix** (`video.wixstatic.com`). They work today, but if the old Wix site/plan is closed those links will likely stop working. Move the files to Vimeo/YouTube before then.
+- `RESEND_API_KEY`: API key from Resend.
+- `ENQUIRY_TO_EMAIL`: where enquiries are delivered.
+- `ENQUIRY_FROM_EMAIL`: sender on a domain verified in Resend, e.g. `Website <enquiries@yourdomain.com>`.
 
-### Video hosting notes
-
-Not verified in this build (no network research was run), so check current terms before choosing:
-
-- YouTube: free, reliable embeds; may show ads and "related videos". "Unlisted" is not private, anyone with the link can watch.
-- Vimeo: cleaner player; the free plan has tight storage/upload limits and fewer privacy options, so check the current plan page.
-- Self-hosting: not recommended (bandwidth cost).
+Enquiries have their reply-to set to the visitor's email address.
 
 ## Deploy
 
-`vercel.json` already rewrites all paths to `index.html`, so it works on Vercel as-is (push to Git, import the repo, build command `yarn build`, output `dist`). On Netlify or Cloudflare Pages use the same build settings, plus a rule sending `/*` to `/index.html` (status 200). Check each host's current free-tier limits first. A custom domain and HTTPS are available on all three.
+`vercel.json` rewrites page paths to `index.html` and leaves `/api/` alone, so it deploys to Vercel as-is: push to Git, import the repo, build command `yarn build`, output `dist`.
 
-When the domain is known, set `site.url` in `src/data/site.js` (enables the sitemap and canonical URLs) and add a `Sitemap:` line to `public/robots.txt`.
+When the domain is known, set `site.url` in `src/data/site.js` and add a `Sitemap:` line to `public/robots.txt`.
 
 ## Known limitations
 
-- It is a client-rendered single-page app: without JavaScript only a notice is shown, and social-share previews use the generic home-page tags rather than per-project ones. Pre-rendering (e.g. moving to Astro) would fix both if needed.
-- No stills/posters exist yet, so cards and video players show labelled placeholders.
+- It's a client-rendered app: without JavaScript only a notice is shown, and social-share previews use the generic home-page tags.
+- The film files are still hosted on Wix (`video.wixstatic.com`). Move them to a video host or your own storage before the Wix site is closed.
+- Paintings are copies of images from the artist's Sanity dataset (IAAA project). They are not linked live.

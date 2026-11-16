@@ -1,7 +1,8 @@
 // Run before build: fails if src/data/projects.js has mistakes that would break a page.
 import { projects } from "./src/data/projects.js";
 
-const keyFor = { youtube: "id", vimeo: "id", file: "src" };
+// The Work page only plays direct video files, so that is the only provider accepted.
+const keyFor = { file: "src" };
 const errors = [];
 const seen = new Set();
 

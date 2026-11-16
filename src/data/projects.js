@@ -1,15 +1,12 @@
-// One entry per project. To add a project, copy an entry and edit it.
+// One entry per film on the Work page. To add a film, copy an entry and edit it.
 //
-//   slug      URL piece: /work/<slug>  (lowercase, hyphens)
-//   title, year, medium, description   (year/medium can be left out until known)
-//   cover     optional image in /public/images/work/, e.g. "/images/work/joute.webp"
-//   coverAlt  describe the image for screen readers
-//   featured  true = shown on the home page
-//   videos    list of { provider, src|id, title, caption, aspect }
-//               provider: "youtube" (id) | "vimeo" (id) | "file" (src: direct .mp4 URL)
-//               aspect:   optional, e.g. "16 / 9" (default) or "4 / 5"
-//   credits, duration, screenings   optional
-//   images    optional extra stills: { src, alt, caption }
+//   slug         unique id (lowercase, hyphens)
+//   title        shown on the Work page
+//   year, medium optional, shown under the title
+//   description  shown in the film's dialog
+//   featured     true = the first featured film plays behind the home page intro
+//   videos       list with one item: { provider: "file", src: direct .mp4 URL, title }
+//   credits      optional list of strings, not shown on the site yet
 //
 // Descriptions below come from the existing site; year/medium were not
 // supplied, so they are left out rather than guessed.
@@ -166,4 +163,3 @@ export const projects = [
 ];
 
 export const featuredProjects = projects.filter((p) => p.featured);
-export const findProject = (slug) => projects.find((p) => p.slug === slug);
