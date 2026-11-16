@@ -65,13 +65,11 @@ export default async function handler(req, res) {
     errors.message = "Message is too long (5,000 characters maximum).";
 
   if (Object.keys(errors).length) {
-    return res
-      .status(400)
-      .json({
-        ok: false,
-        error: "Please check the highlighted fields.",
-        errors,
-      });
+    return res.status(400).json({
+      ok: false,
+      error: "Please check the highlighted fields.",
+      errors,
+    });
   }
 
   const { RESEND_API_KEY, ENQUIRY_TO_EMAIL, ENQUIRY_FROM_EMAIL } = process.env;
@@ -79,13 +77,11 @@ export default async function handler(req, res) {
     console.error(
       "Enquiry email is not configured: set RESEND_API_KEY, ENQUIRY_TO_EMAIL and ENQUIRY_FROM_EMAIL.",
     );
-    return res
-      .status(500)
-      .json({
-        ok: false,
-        error:
-          "The enquiry form is not available right now. Please email directly.",
-      });
+    return res.status(500).json({
+      ok: false,
+      error:
+        "The enquiry form is not available right now. Please email directly.",
+    });
   }
 
   try {
@@ -116,23 +112,19 @@ export default async function handler(req, res) {
         upstream.status,
         await upstream.text(),
       );
-      return res
-        .status(502)
-        .json({
-          ok: false,
-          error:
-            "Your message could not be sent. Please try again or email directly.",
-        });
-    }
-  } catch (err) {
-    console.error("Could not reach Resend:", err);
-    return res
-      .status(502)
-      .json({
+      return res.status(502).json({
         ok: false,
         error:
           "Your message could not be sent. Please try again or email directly.",
       });
+    }
+  } catch (err) {
+    console.error("Could not reach Resend:", err);
+    return res.status(502).json({
+      ok: false,
+      error:
+        "Your message could not be sent. Please try again or email directly.",
+    });
   }
 
   return res.status(200).json({ ok: true });
