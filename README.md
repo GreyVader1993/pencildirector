@@ -51,8 +51,17 @@ Set these environment variables in Vercel (Project Settings → Environment Vari
 - `RESEND_API_KEY`: API key from Resend.
 - `ENQUIRY_TO_EMAIL`: where enquiries are delivered.
 - `ENQUIRY_FROM_EMAIL`: sender on a domain verified in Resend, e.g. `Website <enquiries@yourdomain.com>`.
+- `TURNSTILE_SECRET_KEY`: secret key from Cloudflare Turnstile. Without it, the form refuses every submission.
 
 Enquiries have their reply-to set to the visitor's email address.
+
+### Spam protection
+
+- **Bot check:** a Cloudflare Turnstile widget on the form, verified by the server. The public half is `turnstileSiteKey` in `src/data/site.js`. The file currently holds Cloudflare's test key, which accepts everything, so replace it with the real key before going live.
+- **Honeypot:** a hidden field that real visitors leave empty. Filled-in submissions are dropped silently.
+- **Time check:** submissions made less than three seconds after the form loads are dropped silently.
+- **Link limit:** messages with more than two links are rejected.
+- **Rate limit:** set in the Vercel dashboard (Firewall rules on `/api/enquire`), not in code, because serverless instances don't share memory.
 
 ## Deploy
 

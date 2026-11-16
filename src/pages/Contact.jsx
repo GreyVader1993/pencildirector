@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { site } from "../data/site";
 import usePageMeta from "../components/usePageMeta";
 
 const empty = { name: "", email: "", type: "", message: "", website: "" };
+const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+const TURNSTILE_READY = "turnstile-ready";
 
 export default function Contact() {
   usePageMeta("Enquire", "Enquire about commissions, exhibitions, screenings, workshops and collaborations.");
@@ -10,6 +12,36 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [message, setMessage] = useState("");
+  const [startedAt] = useState(() => Date.now()); // used by the server to spot instant submissions
+
+  // Turnstile widget: loaded once, then rendered explicitly into the form each time the page opens.
+  const widgetHost = useRef(null);
+  const widgetId = useRef(null);
+  useEffect(() => {
+    const renderWidget = () => {
+      if (!widgetHost.current || !window.turnstile || widgetId.current !== null) return;
+      widgetId.current = window.turnstile.render(widgetHost.current, {
+        sitekey: site.turnstileSiteKey,
+        theme: "light",
+      });
+    };
+
+    if (!document.querySelector(`script[src="${TURNSTILE_SRC}"]`)) {
+      const script = document.createElement("script");
+      script.src = TURNSTILE_SRC;
+      script.async = true;
+      script.onload = () => window.dispatchEvent(new Event(TURNSTILE_READY));
+      document.head.appendChild(script);
+    }
+    window.addEventListener(TURNSTILE_READY, renderWidget);
+    renderWidget();
+
+    return () => {
+      window.removeEventListener(TURNSTILE_READY, renderWidget);
+      if (widgetId.current !== null) window.turnstile?.remove(widgetId.current);
+      widgetId.current = null;
+    };
+  }, []);
 
   const update = (e) => {
     const { name, value } = e.target;
@@ -17,15 +49,21 @@ export default function Contact() {
     if (errors[name]) setErrors((err) => ({ ...err, [name]: undefined }));
   };
 
+  // Each Turnstile token can be used once, so the widget is reset after any failed attempt.
+  const resetSpamCheck = () => {
+    if (widgetId.current !== null) window.turnstile?.reset(widgetId.current);
+  };
+
   async function submit(e) {
     e.preventDefault();
+    const turnstileToken = new FormData(e.currentTarget).get("cf-turnstile-response") || "";
     setStatus("sending");
     setMessage("");
     try {
       const res = await fetch("/api/enquire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, startedAt, turnstileToken }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
@@ -37,9 +75,11 @@ export default function Contact() {
       setErrors(data.errors || {});
       setMessage(data.error || "Your message could not be sent. Please try again or email directly.");
       setStatus("error");
+      resetSpamCheck();
     } catch {
       setMessage(`Your message could not be sent. Please check your connection, or email ${site.email}.`);
       setStatus("error");
+      resetSpamCheck();
     }
   }
 
@@ -114,6 +154,10 @@ export default function Contact() {
           <div className="hp" aria-hidden="true">
             <label htmlFor="website">Website (leave this empty)</label>
             <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" value={form.website} onChange={update} />
+          </div>
+
+          <div className="field">
+            <div ref={widgetHost}></div>
           </div>
 
           <button className="button" type="submit" disabled={status === "sending"}>

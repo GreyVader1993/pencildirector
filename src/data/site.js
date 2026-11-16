@@ -11,6 +11,9 @@ export const site = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/tiwari-shraddha/" },
     { label: "Instagram", href: "https://instagram.com/thepencildirector" },
   ],
+  // Public Turnstile site key (safe to publish). This is Cloudflare's test key, which
+  // always passes, so replace it with the real key from the Cloudflare dashboard.
+  turnstileSiteKey: "1x00000000000000000000AA", // TODO: real Turnstile site key
   // Options shown in the enquiry form. Must match TYPES in api/enquire.js.
   enquiryTypes: [
     "Commission",

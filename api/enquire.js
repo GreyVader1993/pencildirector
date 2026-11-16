@@ -1,13 +1,14 @@
 // Vercel serverless function: receives an enquiry from the contact form and
 // emails it to the artist via Resend (https://resend.com).
 //
-// Required environment variables (set with `vercel env add`, or via the
-// Resend integration once installed):
+// Required environment variables (set in the Vercel project settings):
 //   RESEND_API_KEY        API key from Resend
 //   ENQUIRY_TO_EMAIL      where enquiries are delivered, e.g. the artist's inbox
 //   ENQUIRY_FROM_EMAIL    a sender on a domain verified in Resend, e.g. "Website <enquiries@yourdomain.com>"
+//   TURNSTILE_SECRET_KEY  secret key from Cloudflare Turnstile (pairs with site.turnstileSiteKey)
 
 const RESEND_URL = "https://api.resend.com/emails";
+const TURNSTILE_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const TYPES = [
   "Commission",
@@ -17,6 +18,8 @@ const TYPES = [
   "Other",
 ];
 const LIMITS = { name: 120, email: 254, message: 5000 };
+const MIN_FILL_MS = 3000; // people take longer than this to fill in the form
+const MAX_LINKS = 2;
 
 // Remove line breaks so user input cannot inject extra headers into the subject.
 const oneLine = (s) => s.replace(/[\r\n]+/g, " ").trim();
@@ -28,6 +31,25 @@ function parseBody(req) {
   } catch {
     return null;
   }
+}
+
+function clientIp(req) {
+  const forwarded = req.headers?.["x-forwarded-for"];
+  if (typeof forwarded === "string" && forwarded) return forwarded.split(",")[0].trim();
+  return req.socket?.remoteAddress || "";
+}
+
+// Asks Cloudflare whether a Turnstile token is valid. Throws if the secret is missing.
+async function turnstilePasses(token, ip) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) throw new Error("TURNSTILE_SECRET_KEY is not set");
+  const res = await fetch(TURNSTILE_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ secret, response: token, remoteip: ip }),
+  });
+  const data = await res.json();
+  return data.success === true;
 }
 
 export default async function handler(req, res) {
@@ -47,6 +69,16 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true });
   }
 
+  // Time check: the form records when it was shown. A submission faster than a
+  // person could type is dropped silently, the same as the honeypot.
+  const startedAt = Number(body.startedAt);
+  if (!Number.isFinite(startedAt) || startedAt > Date.now()) {
+    return res.status(400).json({ ok: false, error: "Invalid request." });
+  }
+  if (Date.now() - startedAt < MIN_FILL_MS) {
+    return res.status(200).json({ ok: true });
+  }
+
   const name = typeof body.name === "string" ? body.name.trim() : "";
   const email = typeof body.email === "string" ? body.email.trim() : "";
   const type = typeof body.type === "string" ? body.type.trim() : "";
@@ -63,12 +95,39 @@ export default async function handler(req, res) {
   if (!message) errors.message = "Please write a message.";
   else if (message.length > LIMITS.message)
     errors.message = "Message is too long (5,000 characters maximum).";
+  else if ((message.match(/https?:\/\/|www\./gi) || []).length > MAX_LINKS)
+    errors.message = `Please keep to ${MAX_LINKS} links or fewer.`;
 
   if (Object.keys(errors).length) {
     return res.status(400).json({
       ok: false,
       error: "Please check the highlighted fields.",
       errors,
+    });
+  }
+
+  // Bot check: the token comes from the Turnstile widget on the form.
+  const token =
+    typeof body.turnstileToken === "string" ? body.turnstileToken : "";
+  if (!token) {
+    return res.status(400).json({
+      ok: false,
+      error: "Please complete the spam check and try again.",
+    });
+  }
+  try {
+    if (!(await turnstilePasses(token, clientIp(req)))) {
+      return res.status(400).json({
+        ok: false,
+        error: "The spam check did not pass. Please try again.",
+      });
+    }
+  } catch (err) {
+    console.error("Turnstile check failed:", err);
+    return res.status(500).json({
+      ok: false,
+      error:
+        "The enquiry form is not available right now. Please email directly.",
     });
   }
 
