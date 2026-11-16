@@ -9,7 +9,13 @@
 
 const RESEND_URL = "https://api.resend.com/emails";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const TYPES = ["Commission", "Exhibition or screening", "Workshop or education", "Collaboration", "Other"];
+const TYPES = [
+  "Commission",
+  "Exhibition or screening",
+  "Workshop or education",
+  "Collaboration",
+  "Other",
+];
 const LIMITS = { name: 120, email: 254, message: 5000 };
 
 // Remove line breaks so user input cannot inject extra headers into the subject.
@@ -33,7 +39,8 @@ export default async function handler(req, res) {
   }
 
   const body = parseBody(req);
-  if (!body) return res.status(400).json({ ok: false, error: "Invalid request." });
+  if (!body)
+    return res.status(400).json({ ok: false, error: "Invalid request." });
 
   // Honeypot: real visitors leave this field empty. Pretend success for bots.
   if (typeof body.website === "string" && body.website.trim() !== "") {
@@ -49,19 +56,36 @@ export default async function handler(req, res) {
   if (!name) errors.name = "Please enter your name.";
   else if (name.length > LIMITS.name) errors.name = "Name is too long.";
   if (!email) errors.email = "Please enter your email address.";
-  else if (email.length > LIMITS.email || !EMAIL_RE.test(email)) errors.email = "Please enter a valid email address.";
-  if (!TYPES.includes(type)) errors.type = "Please choose what your enquiry is about.";
+  else if (email.length > LIMITS.email || !EMAIL_RE.test(email))
+    errors.email = "Please enter a valid email address.";
+  if (!TYPES.includes(type))
+    errors.type = "Please choose what your enquiry is about.";
   if (!message) errors.message = "Please write a message.";
-  else if (message.length > LIMITS.message) errors.message = "Message is too long (5,000 characters maximum).";
+  else if (message.length > LIMITS.message)
+    errors.message = "Message is too long (5,000 characters maximum).";
 
   if (Object.keys(errors).length) {
-    return res.status(400).json({ ok: false, error: "Please check the highlighted fields.", errors });
+    return res
+      .status(400)
+      .json({
+        ok: false,
+        error: "Please check the highlighted fields.",
+        errors,
+      });
   }
 
   const { RESEND_API_KEY, ENQUIRY_TO_EMAIL, ENQUIRY_FROM_EMAIL } = process.env;
   if (!RESEND_API_KEY || !ENQUIRY_TO_EMAIL || !ENQUIRY_FROM_EMAIL) {
-    console.error("Enquiry email is not configured: set RESEND_API_KEY, ENQUIRY_TO_EMAIL and ENQUIRY_FROM_EMAIL.");
-    return res.status(500).json({ ok: false, error: "The enquiry form is not available right now. Please email directly." });
+    console.error(
+      "Enquiry email is not configured: set RESEND_API_KEY, ENQUIRY_TO_EMAIL and ENQUIRY_FROM_EMAIL.",
+    );
+    return res
+      .status(500)
+      .json({
+        ok: false,
+        error:
+          "The enquiry form is not available right now. Please email directly.",
+      });
   }
 
   try {
@@ -87,12 +111,28 @@ export default async function handler(req, res) {
     });
 
     if (!upstream.ok) {
-      console.error("Resend rejected the enquiry:", upstream.status, await upstream.text());
-      return res.status(502).json({ ok: false, error: "Your message could not be sent. Please try again or email directly." });
+      console.error(
+        "Resend rejected the enquiry:",
+        upstream.status,
+        await upstream.text(),
+      );
+      return res
+        .status(502)
+        .json({
+          ok: false,
+          error:
+            "Your message could not be sent. Please try again or email directly.",
+        });
     }
   } catch (err) {
     console.error("Could not reach Resend:", err);
-    return res.status(502).json({ ok: false, error: "Your message could not be sent. Please try again or email directly." });
+    return res
+      .status(502)
+      .json({
+        ok: false,
+        error:
+          "Your message could not be sent. Please try again or email directly.",
+      });
   }
 
   return res.status(200).json({ ok: true });

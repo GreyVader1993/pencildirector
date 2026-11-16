@@ -12,14 +12,14 @@ yarn build      # outputs dist/ (and dist/sitemap.xml once site.url is set)
 
 ## Where things are
 
-| To change…                                   | Edit                                   |
-| -------------------------------------------- | -------------------------------------- |
-| Name, tagline, email, social links, CV, nav  | `src/data/site.js`                     |
-| Projects (add / edit / reorder)              | `src/data/projects.js`                 |
-| Education page (role, workshops, past work)  | `src/data/education.js`                |
-| About page (bio, methods, exhibitions)       | `src/data/about.js`                    |
-| Colors, fonts, spacing                       | top of `src/index.css` (`:root`)       |
-| Images                                       | `public/images/{work,education,about}/` |
+| To change…                                  | Edit                                    |
+| ------------------------------------------- | --------------------------------------- |
+| Name, tagline, email, social links, CV, nav | `src/data/site.js`                      |
+| Projects (add / edit / reorder)             | `src/data/projects.js`                  |
+| Education page (role, workshops, past work) | `src/data/education.js`                 |
+| About page (bio, methods, exhibitions)      | `src/data/about.js`                     |
+| Colors, fonts, spacing                      | top of `src/index.css` (`:root`)        |
+| Images                                      | `public/images/{work,education,about}/` |
 
 Anything marked `TODO` in those files, or shown on the site as "To be added", is information still needed from the artist.
 

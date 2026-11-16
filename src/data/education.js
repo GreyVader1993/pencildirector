@@ -18,17 +18,48 @@ export const education = {
   philosophy: "", // TODO: 2-3 sentences, in the artist's own words, on how they teach
   // Source: LinkedIn profile export (Oct 2026).
   past: [
-    { title: "Camp Director and Volunteer Coordinator", org: "VisArts, Maryland", years: "2025", description: "" },
-    { title: "Faculty", org: "VisArts, Rockville, Maryland", years: "2022–2025", description: "" },
-    { title: "Camp Co-Director and Volunteer Coordinator", org: "VisArts, Maryland", years: "2022–2025", description: "" },
-    { title: "Teaching Faculty", org: "India School, Bethesda, Maryland", years: "2023–2025", description: "" },
-    { title: "Teaching Artist", org: "CREATE Arts Center, Maryland", years: "2022–2023", description: "" },
-    { title: "Graduate Student Assistant", org: "Pratt Institute, Brooklyn, New York", years: "2021–2022", description: "" },
+    {
+      title: "Camp Director and Volunteer Coordinator",
+      org: "VisArts, Maryland",
+      years: "2025",
+      description: "",
+    },
+    {
+      title: "Faculty",
+      org: "VisArts, Rockville, Maryland",
+      years: "2022–2025",
+      description: "",
+    },
+    {
+      title: "Camp Co-Director and Volunteer Coordinator",
+      org: "VisArts, Maryland",
+      years: "2022–2025",
+      description: "",
+    },
+    {
+      title: "Teaching Faculty",
+      org: "India School, Bethesda, Maryland",
+      years: "2023–2025",
+      description: "",
+    },
+    {
+      title: "Teaching Artist",
+      org: "CREATE Arts Center, Maryland",
+      years: "2022–2023",
+      description: "",
+    },
+    {
+      title: "Graduate Student Assistant",
+      org: "Pratt Institute, Brooklyn, New York",
+      years: "2021–2022",
+      description: "",
+    },
     {
       title: "Art Teacher",
       org: "Katha NGO",
       years: "2011",
-      description: "Taught young children Indian art forms such as Madhubani and Warli.",
+      description:
+        "Taught young children Indian art forms such as Madhubani and Warli.",
     },
   ],
   workshops: [
