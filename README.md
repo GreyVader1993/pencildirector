@@ -57,7 +57,7 @@ Enquiries have their reply-to set to the visitor's email address.
 
 ### Spam protection
 
-- **Bot check:** a Cloudflare Turnstile widget on the form, verified by the server. The public half is `turnstileSiteKey` in `src/data/site.js`. The file currently holds Cloudflare's test key, which accepts everything, so replace it with the real key before going live.
+- **Bot check:** a Cloudflare Turnstile widget on the form, verified by the server. The public half is the `TURNSTILE_SITE_KEY` environment variable (read in `src/pages/Contact.jsx`). It must come from the same widget as `TURNSTILE_SECRET_KEY`.
 - **Honeypot:** a hidden field that real visitors leave empty. Filled-in submissions are dropped silently.
 - **Time check:** submissions made less than three seconds after the form loads are dropped silently.
 - **Link limit:** messages with more than two links are rejected.

@@ -11,9 +11,6 @@ export const site = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/tiwari-shraddha/" },
     { label: "Instagram", href: "https://instagram.com/thepencildirector" },
   ],
-  // Public Turnstile site key, set in the environment as TURNSTILE_SITE_KEY (see vite.config.js).
-  // It must belong to the same widget as TURNSTILE_SECRET_KEY.
-  turnstileSiteKey: import.meta.env.TURNSTILE_SITE_KEY,
   // Options shown in the enquiry form. Must match TYPES in api/enquire.js.
   enquiryTypes: [
     "Commission",
