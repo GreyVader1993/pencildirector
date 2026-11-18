@@ -9,7 +9,10 @@ const seen = new Set();
 projects.forEach((p, i) => {
   const where = `projects[${i}]${p.slug ? ` (${p.slug})` : ""}`;
   if (!p.slug) errors.push(`${where}: missing slug`);
-  else if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.slug)) errors.push(`${where}: slug must be lowercase letters, numbers and hyphens`);
+  else if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.slug))
+    errors.push(
+      `${where}: slug must be lowercase letters, numbers and hyphens`,
+    );
   else if (seen.has(p.slug)) errors.push(`${where}: duplicate slug`);
   seen.add(p.slug);
 
@@ -18,13 +21,19 @@ projects.forEach((p, i) => {
 
   (p.videos ?? []).forEach((v, j) => {
     const key = keyFor[v.provider];
-    if (!key) errors.push(`${where}: videos[${j}] has unknown provider "${v.provider}"`);
-    else if (!v[key]) errors.push(`${where}: videos[${j}] (${v.provider}) is missing "${key}"`);
+    if (!key)
+      errors.push(
+        `${where}: videos[${j}] has unknown provider "${v.provider}"`,
+      );
+    else if (!v[key])
+      errors.push(`${where}: videos[${j}] (${v.provider}) is missing "${key}"`);
   });
 });
 
 if (errors.length) {
-  console.error(`Data check failed:\n${errors.map((e) => `  - ${e}`).join("\n")}`);
+  console.error(
+    `Data check failed:\n${errors.map((e) => `  - ${e}`).join("\n")}`,
+  );
   process.exit(1);
 }
 console.log(`data ok: ${projects.length} projects`);
