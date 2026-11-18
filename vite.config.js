@@ -8,7 +8,9 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      "import.meta.env.TURNSTILE_SITE_KEY": JSON.stringify(env.TURNSTILE_SITE_KEY ?? ""),
+      "import.meta.env.TURNSTILE_SITE_KEY": JSON.stringify(
+        env.TURNSTILE_SITE_KEY ?? "",
+      ),
     },
   };
 });
