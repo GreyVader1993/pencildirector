@@ -6,6 +6,9 @@ const empty = { name: "", email: "", type: "", message: "", website: "" };
 const TURNSTILE_SRC =
   "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
 const TURNSTILE_READY = "turnstile-ready";
+// Public Turnstile site key, from the TURNSTILE_SITE_KEY environment variable (see vite.config.js).
+// It must belong to the same widget as TURNSTILE_SECRET_KEY.
+const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
 
 export default function Contact() {
   usePageMeta(
@@ -26,7 +29,7 @@ export default function Contact() {
       if (!widgetHost.current || !window.turnstile || widgetId.current !== null)
         return;
       widgetId.current = window.turnstile.render(widgetHost.current, {
-        sitekey: site.turnstileSiteKey,
+        sitekey: TURNSTILE_SITE_KEY,
         theme: "light",
       });
     };
