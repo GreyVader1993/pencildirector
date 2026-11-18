@@ -52,13 +52,17 @@ export default function VideoReel({ project }) {
           aria-hidden="true"
           tabIndex={-1}
         />
-        <span className="reel__cue" aria-hidden="true">Play</span>
+        <span className="reel__cue" aria-hidden="true">
+          Play
+        </span>
       </button>
 
       <div className="reel__caption">
         <h3>{project.title}</h3>
         {(project.year || project.medium) && (
-          <p className="meta">{[project.year, project.medium].filter(Boolean).join(" · ")}</p>
+          <p className="meta">
+            {[project.year, project.medium].filter(Boolean).join(" · ")}
+          </p>
         )}
       </div>
 
@@ -72,10 +76,24 @@ export default function VideoReel({ project }) {
         <div className="reel__dialog-inner">
           <div className="reel__dialog-bar">
             <h3>{project.title}</h3>
-            <button type="button" className="button button--small" onClick={close}>Close</button>
+            <button
+              type="button"
+              className="button button--small"
+              onClick={close}
+            >
+              Close
+            </button>
           </div>
-          <video src={video.src} controls playsInline preload="metadata" className="reel__full" />
-          {project.description && <p className="reel__desc">{project.description}</p>}
+          <video
+            src={video.src}
+            controls
+            playsInline
+            preload="metadata"
+            className="reel__full"
+          />
+          {project.description && (
+            <p className="reel__desc">{project.description}</p>
+          )}
         </div>
       </dialog>
     </article>

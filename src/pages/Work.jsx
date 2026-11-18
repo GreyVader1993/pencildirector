@@ -4,7 +4,10 @@ import VideoReel from "../components/VideoReel";
 import usePageMeta from "../components/usePageMeta";
 
 export default function Work() {
-  usePageMeta("Work", "Experimental animation, stop-motion, and paintings and mixed-media work by Shraddha Tiwari.");
+  usePageMeta(
+    "Work",
+    "Experimental animation, stop-motion, and paintings and mixed-media work by Shraddha Tiwari.",
+  );
   const films = projects.filter((p) => p.videos[0]?.provider === "file");
 
   return (
@@ -12,10 +15,14 @@ export default function Work() {
       <section className="section" aria-labelledby="work-heading">
         <h1 id="work-heading">Work</h1>
         <p className="lede">Films and animation.</p>
-        <p className="meta">Hover over a film to preview it. Select it to watch with sound.</p>
+        <p className="meta">
+          Hover over a film to preview it. Select it to watch with sound.
+        </p>
 
         <div className="reel-grid">
-          {films.map((p) => <VideoReel key={p.slug} project={p} />)}
+          {films.map((p) => (
+            <VideoReel key={p.slug} project={p} />
+          ))}
         </div>
       </section>
 

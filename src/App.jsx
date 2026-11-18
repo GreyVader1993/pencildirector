@@ -19,9 +19,18 @@ export default function App() {
           <Route path="/work/:slug" element={<Navigate to="/work" replace />} />
           <Route path="/art" element={<Navigate to="/work" replace />} />
           <Route path="/about" element={<Navigate to="/#about" replace />} />
-          <Route path="/experience" element={<Navigate to="/#about" replace />} />
-          <Route path="/education" element={<Navigate to="/#about" replace />} />
-          <Route path="/workshops" element={<Navigate to="/#about" replace />} />
+          <Route
+            path="/experience"
+            element={<Navigate to="/#about" replace />}
+          />
+          <Route
+            path="/education"
+            element={<Navigate to="/#about" replace />}
+          />
+          <Route
+            path="/workshops"
+            element={<Navigate to="/#about" replace />}
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -25,24 +25,40 @@ export default function Home() {
         )}
         <div className="hero-video__scrim" />
         <div className="hero-video__content">
-          <h1 id="intro-heading" className="lede">{site.tagline}</h1>
+          <h1 id="intro-heading" className="lede">
+            {site.tagline}
+          </h1>
           <p className="hero-video__intro">{site.intro}</p>
           <p className="hero-video__actions">
-            <Link className="button button--light" to="/work">View work</Link>
-            <Link className="button button--ghost" to="/contact">Enquire</Link>
+            <Link className="button button--light" to="/work">
+              View work
+            </Link>
+            <Link className="button button--ghost" to="/contact">
+              Enquire
+            </Link>
           </p>
         </div>
       </section>
 
-      <section className="section split" id="about" aria-labelledby="about-heading">
+      <section
+        className="section split"
+        id="about"
+        aria-labelledby="about-heading"
+      >
         <h2 id="about-heading">About</h2>
         <div className="prose">
           {about.bio.length ? (
             about.bio.map((t) => <p key={t}>{t}</p>)
           ) : (
-            <p className="todo">A short biography in the artist’s own words will be added here.</p>
+            <p className="todo">
+              A short biography in the artist’s own words will be added here.
+            </p>
           )}
-          <p><Link to="/contact">Commissions, screenings and collaborations →</Link></p>
+          <p>
+            <Link to="/contact">
+              Commissions, screenings and collaborations →
+            </Link>
+          </p>
         </div>
       </section>
     </>

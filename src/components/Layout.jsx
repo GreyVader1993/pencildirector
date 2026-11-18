@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useLocation, useNavigationType } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigationType,
+} from "react-router-dom";
 import { site } from "../data/site";
 
 function Header() {
@@ -11,13 +17,26 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/" className="wordmark">{site.name}</Link>
-      <button className="menu-toggle" aria-expanded={open} aria-controls="site-nav" onClick={() => setOpen(!open)}>
+      <Link to="/" className="wordmark">
+        {site.name}
+      </Link>
+      <button
+        className="menu-toggle"
+        aria-expanded={open}
+        aria-controls="site-nav"
+        onClick={() => setOpen(!open)}
+      >
         {open ? "Close" : "Menu"}
       </button>
-      <nav id="site-nav" aria-label="Primary" className={open ? "nav is-open" : "nav"}>
+      <nav
+        id="site-nav"
+        aria-label="Primary"
+        className={open ? "nav is-open" : "nav"}
+      >
         {site.nav.map((n) => (
-          <NavLink key={n.to} to={n.to}>{n.label}</NavLink>
+          <NavLink key={n.to} to={n.to}>
+            {n.label}
+          </NavLink>
         ))}
       </nav>
     </header>
@@ -33,11 +52,15 @@ function Footer() {
       <ul>
         {site.links.map((l) => (
           <li key={l.href}>
-            <a href={l.href} target="_blank" rel="noreferrer">{l.label}</a>
+            <a href={l.href} target="_blank" rel="noreferrer">
+              {l.label}
+            </a>
           </li>
         ))}
       </ul>
-      <p className="meta">© {new Date().getFullYear()} {site.name}</p>
+      <p className="meta">
+        © {new Date().getFullYear()} {site.name}
+      </p>
     </footer>
   );
 }
@@ -54,7 +77,9 @@ export default function Layout() {
   }, [pathname, hash, navType]);
   return (
     <>
-      <a className="skip" href="#main">Skip to content</a>
+      <a className="skip" href="#main">
+        Skip to content
+      </a>
       <Header />
       <main id="main">
         <Outlet />
