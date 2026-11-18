@@ -7,7 +7,13 @@
 //   ENQUIRY_FROM_EMAIL    a sender on a domain verified in Resend, e.g. "Website <enquiries@yourdomain.com>"
 //   TURNSTILE_SECRET_KEY  secret key from Cloudflare Turnstile (pairs with site.turnstileSiteKey)
 
-const RESEND_URL = "https://api.resend.com/emails";
+import {
+  autoReplyHtml,
+  autoReplySubject,
+  autoReplyText,
+} from "../emails/auto-reply.js";
+
+const RESEND_URL ="https://api.resend.com/emails";
 const TURNSTILE_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -186,6 +192,31 @@ export default async function handler(req, res) {
       error:
         "Your message could not be sent. Please try again or email directly.",
     });
+  }
+
+  // Automatic reply to the visitor. Best effort: the enquiry has already reached the
+  // artist, so a failure here is logged but does not fail the submission.
+  try {
+    const reply = await fetch(RESEND_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: ENQUIRY_FROM_EMAIL,
+        to: [email],
+        reply_to: ENQUIRY_TO_EMAIL,
+        subject: autoReplySubject,
+        html: autoReplyHtml(name),
+        text: autoReplyText(name),
+      }),
+    });
+    if (!reply.ok) {
+      console.error("Auto-reply rejected:", reply.status, await reply.text());
+    }
+  } catch (err) {
+    console.error("Could not send auto-reply:", err);
   }
 
   return res.status(200).json({ ok: true });
