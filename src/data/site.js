@@ -5,15 +5,15 @@ export const site = {
   tagline: "Experimental animation, moving image, and creative education",
   intro:
     "Shraddha Tiwari makes stop-motion, mixed-media and experimental animation, and works full time as a youth program coordinator.",
-  email: "hello@thepencildirector.com", // TODO: confirm this is the right address
+  email: "contact@thepencildirector.com",
   url: "", // TODO: production domain, e.g. "https://example.com" (used for canonical/sitemap)
   links: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/tiwari-shraddha/" },
     { label: "Instagram", href: "https://instagram.com/thepencildirector" },
   ],
-  // Public Turnstile site key (safe to publish). This is Cloudflare's test key, which
-  // always passes, so replace it with the real key from the Cloudflare dashboard.
-  turnstileSiteKey: "1x00000000000000000000AA", // TODO: real Turnstile site key
+  // Public Turnstile site key, set in the environment as TURNSTILE_SITE_KEY (see vite.config.js).
+  // It must belong to the same widget as TURNSTILE_SECRET_KEY.
+  turnstileSiteKey: import.meta.env.TURNSTILE_SITE_KEY,
   // Options shown in the enquiry form. Must match TYPES in api/enquire.js.
   enquiryTypes: [
     "Commission",
