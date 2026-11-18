@@ -13,7 +13,7 @@ import {
   autoReplyText,
 } from "../emails/auto-reply.js";
 
-const RESEND_URL ="https://api.resend.com/emails";
+const RESEND_URL = "https://api.resend.com/emails";
 const TURNSTILE_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
